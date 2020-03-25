@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="edit_window" class="ttk.Frame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="listbox_tanks" class="tk.Listbox">
+        <property name="font">{Times New Roman} 12 {}</property>
+        <property name="selectmode">single</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="listbox_info" class="tk.Listbox">
+        <property name="font">{Times New Roman} 12 {}</property>
+        <property name="selectmode">single</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="button_save" class="tk.Button">
+        <property name="command">save_func</property>
+        <property name="font">TkDefaultFont</property>
+        <property name="text" translatable="yes">Save</property>
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="textbox_info" class="tk.Text">
+        <property name="height">10</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">s</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="button_exit" class="tk.Button">
+        <property name="command">exit_func</property>
+        <property name="text" translatable="yes">Exit</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">sw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_1" class="tk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">nw</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>

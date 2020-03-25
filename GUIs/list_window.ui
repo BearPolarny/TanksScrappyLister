@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="list_of_tanks" class="ttk.Frame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="listbox_tanks" class="tk.Listbox">
+        <property name="font">{Times New Roman} 12 {}</property>
+        <property name="height">26</property>
+        <property name="selectmode">single</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="button_back_list" class="tk.Button">
+        <property name="command">back_func</property>
+        <property name="text" translatable="yes">Back</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">sw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="text_tank_specs" class="tk.Text">
+        <property name="height">30</property>
+        <property name="width">70</property>
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
