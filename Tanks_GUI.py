@@ -19,6 +19,10 @@ import os.path
 # In[12]:
 
 
+class NotATankException(Exception):
+    pass
+
+
 class AddWindow:
 
     def exit_func(self):
@@ -37,7 +41,6 @@ class AddWindow:
                         self.aliases[t.alias] = t.name
                     else:
                         self.aliases[t.name] = t.name
-
             if name:
                 msg.showinfo("Added", "Dodano czolg {}, gratki".format(name))
         except TypeError:
@@ -58,6 +61,9 @@ class AddWindow:
         try:
             boxs = scrapper(url_end)
             tnks = tank_factory(boxs, url_end)
+            for t in tnks:
+                if t.type.find('tank') == -1:
+                    raise NotATankException
 
             self.textbox.configure(state=tk.NORMAL)
             self.textbox.delete('1.0', tk.END)
@@ -80,7 +86,11 @@ class AddWindow:
             self.textbox.insert(tk.END, "Bad URL\n"
                                         "https://en.wikipedia.org/wiki/{} is not correct".format(url_end))
             self.textbox.configure(state=tk.DISABLED)
-
+        except NotATankException:
+            self.textbox.configure(state=tk.NORMAL)
+            self.textbox.delete('1.0', tk.END)
+            self.textbox.insert(tk.END, "This probably isn't a tank")
+            self.textbox.configure(state=tk.DISABLED)
     def __init__(self, tanks, alias):
         super().__init__()
         self.tanks_to_save = None
@@ -320,7 +330,7 @@ class MainWindow:
         builder.connect_callbacks(self)
 
         self.label = builder.get_object('label_title')
-        self.label.configure(text="Tanks explorer v0.1")
+        self.label.configure(text="Tanks explorer v0.1.1")
 
         self.tanks = tanks
 
