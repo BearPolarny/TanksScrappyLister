@@ -41,8 +41,14 @@ class AddWindow:
                         self.aliases[t.alias] = t.name
                     else:
                         self.aliases[t.name] = t.name
-            if name:
-                msg.showinfo("Added", "Dodano czolg {}, gratki".format(name))
+
+            for tank in self.tanks.values():
+                for nkey in self.non_keys:
+                    if nkey not in tank.chapters.keys():
+                        tank.chapters[nkey] = "missing data"
+
+            # if name:
+                # msg.showinfo("Added", "Dodano czolg {}, gratki".format(name))
         except TypeError:
             self.textbox.configure(state=tk.NORMAL)
             self.textbox.delete('1.0', tk.END)
@@ -60,7 +66,8 @@ class AddWindow:
         url_end = entry.get()
         try:
             boxs = scrapper(url_end)
-            tnks = tank_factory(boxs, url_end)
+            tnks, self.non_keys = tank_factory(boxs, url_end)
+
             for t in tnks:
                 if t.type.find('tank') == -1:
                     raise NotATankException
@@ -91,6 +98,7 @@ class AddWindow:
             self.textbox.delete('1.0', tk.END)
             self.textbox.insert(tk.END, "This probably isn't a tank")
             self.textbox.configure(state=tk.DISABLED)
+
     def __init__(self, tanks, alias):
         super().__init__()
         self.tanks_to_save = None
@@ -99,6 +107,8 @@ class AddWindow:
         self.builder = builder = pygubu.Builder()
         builder.add_from_file("GUIs/add_window.ui")
         self.main_window = builder.get_object('add_window')
+
+        self.non_keys = set()
 
         builder.connect_callbacks(self)
         self.textbox = builder.get_object("Text_1")
@@ -116,13 +126,19 @@ class EditWindow:
 
     def save_func(self):
 
+        # manual selection (3/3)
         if self.edited_value == 'Alias':
-            self.selected_tank.alias = self.textbox.get('1.0', tk.END)[:-1]
-            for t in self.tanks.values():
-                if t.alias:
-                    self.aliases[t.alias] = t.name
-                else:
-                    self.aliases[t.name] = t.name
+            nalias = self.textbox.get('1.0', tk.END)[:-1]
+            self.aliases[nalias] = self.selected_tank.name
+            self.aliases.pop(self.selected_tank.name)
+            self.selected_tank.alias = nalias
+        elif self.edited_value == 'Name':
+            nname = self.textbox.get('1.0', tk.END)[:-1]
+            if not self.selected_tank.alias:
+                self.aliases[nname] = self.selected_tank.name
+                self.aliases.pop(self.selected_tank.name)
+            self.selected_tank.name = nname
+
         else:
             self.selected_tank.chapters[self.edited_value] = self.textbox.get('1.0', tk.END)[:-1]
 
@@ -132,9 +148,11 @@ class EditWindow:
     def onselect_tank(self, evt):
         w = evt.widget
         try:
-            index = int(w.curselection()[0])
+            # position and tank under selection
 
+            index = int(w.curselection()[0])
             value = w.get(index)
+
             self.textbox.delete('1.0', tk.END)
             tank = self.tanks[self.aliases[value]]
 
@@ -144,10 +162,14 @@ class EditWindow:
             self.listbox_info.configure(width=max(names))
 
             self.selected_tank = tank
-            self.listbox_info.insert(1, "Alias")
 
+            # Manually add positions (1/3)
+            self.listbox_info.insert(1, "Alias")
+            self.listbox_info.insert(2, "Name")
+
+            # Add tanks values to list
             for k, v in enumerate(tank.chapters.keys()):
-                self.listbox_info.insert(k + 2, v)
+                self.listbox_info.insert(k + 3, v)
 
             al = self.selected_tank.alias if self.selected_tank.alias else self.selected_tank.name
             self.title.set("Tank: {}, Value: ".format(al))
@@ -159,15 +181,26 @@ class EditWindow:
         w = event.widget
 
         try:
+            # position and value under selection
             index = int(w.curselection()[0])
-
             value = w.get(index)
+
             self.textbox.delete('1.0', tk.END)
             self.edited_value = value
+
+            # alias for title update
             al = self.selected_tank.alias if self.selected_tank.alias else self.selected_tank.name
+
+            # Selecting correct value from tank
+            # manual section (2/3):
             if value == 'Alias':
                 self.textbox.insert(
-                    tk.END, self.selected_tank.alias)
+                    tk.END, str(self.selected_tank.alias))
+            elif value == 'Name':
+                self.textbox.insert(
+                    tk.END, self.selected_tank.name
+                )
+            # automatic section
             else:
                 self.textbox.insert(
                     tk.END, self.selected_tank.chapters[self.edited_value])
@@ -219,6 +252,7 @@ class ListWindow:
         # dict().pop
         try:
             self.tanks.pop(self.selected_tank.name)
+            self.aliases.pop(self.selected_tank.alias)
         except KeyError:
             pass
         self.update_list()
@@ -313,7 +347,9 @@ class MainWindow:
                         # print(t.name)
                         pass
         except FileNotFoundError:
+            tanks = {}
             print(os.path.curdir)
+
 
         self.builder = builder = pygubu.Builder()
 
