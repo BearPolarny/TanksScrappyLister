@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="import" class="tk.Toplevel">
+    <property name="height">200</property>
+    <property name="title" translatable="yes">Import</property>
+    <property name="width">200</property>
+    <child>
+      <object id="Frame_1" class="ttk.Frame">
+        <property name="height">126</property>
+        <property name="padding">20</property>
+        <property name="width">300</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">False</property>
+          <property name="row">2</property>
+        </layout>
+        <child>
+          <object id="Button_1" class="ttk.Button">
+            <property name="command">exit_func</property>
+            <property name="text" translatable="yes">No</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object id="Button_2" class="ttk.Button">
+            <property name="command">yesman</property>
+            <property name="text" translatable="yes">Yass</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object id="Label_1" class="ttk.Label">
+            <property name="text" translatable="yes">Import tanks from predefined list?</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="columnspan">2</property>
+              <property name="padx">10</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -1,22 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
   <object id="list_of_tanks" class="ttk.Frame">
-    <property name="height">200</property>
-    <property name="width">200</property>
+    <property name="height">600</property>
+    <property name="width">800</property>
     <layout>
       <property name="column">0</property>
-      <property name="propagate">True</property>
+      <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
     <child>
       <object id="listbox_tanks" class="tk.Listbox">
         <property name="font">{Times New Roman} 12 {}</property>
-        <property name="height">26</property>
+        <property name="height">24</property>
         <property name="selectmode">single</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
+          <property name="sticky">n</property>
         </layout>
       </object>
     </child>
@@ -34,8 +35,8 @@
     </child>
     <child>
       <object id="text_tank_specs" class="tk.Text">
-        <property name="height">30</property>
-        <property name="width">70</property>
+        <property name="height">28</property>
+        <property name="width">59</property>
         <layout>
           <property name="column">3</property>
           <property name="propagate">True</property>

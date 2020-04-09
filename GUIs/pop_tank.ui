@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="pop_tank" class="tk.Toplevel">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object id="text" class="tk.Text">
+        <property name="height">35</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>

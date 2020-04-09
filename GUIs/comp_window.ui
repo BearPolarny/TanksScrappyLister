@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="comp_window" class="tk.Frame">
+    <property name="height">600</property>
+    <property name="width">800</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="Frame_7" class="tk.Frame">
+        <property name="height">500</property>
+        <property name="width">750</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">25</property>
+          <property name="pady">50</property>
+          <property name="propagate">False</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object id="Listbox_2" class="tk.Listbox">
+            <property name="height">23</property>
+            <property name="width">45</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object id="Button_2" class="tk.Button">
+        <property name="command">exit_func</property>
+        <property name="default">normal</property>
+        <property name="padx">20</property>
+        <property name="text" translatable="yes">Back</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">sw</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>

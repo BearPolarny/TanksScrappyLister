@@ -1,5 +1,5 @@
 import tkinter as tk
-from Tanks_GUI import MainWindow
+from windows.MainWindow import MainWindow
 
 if __name__ == '__main__':
     root = tk.Tk()
